@@ -24,9 +24,10 @@ const AuthForm = () => {
   async function handleLogin() {
     console.log("Logging In", formData);
     let userData = formData;
+    const apiUrl = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
     try {
       const response = await fetch(
-        "http://127.0.0.1:8000/login/",
+        `${apiUrl}/login/`,
         {
           method: "POST",
           headers: {
@@ -57,9 +58,10 @@ const AuthForm = () => {
   async function handleRegister() {
     console.log("Registering", formData);
     let userData = formData;
+    const apiUrl = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
     try {
       const response = await fetch(
-        "http://127.0.0.1:8000/register/",
+        `${apiUrl}/register/`,
         {
           method: "POST",
           headers: {

@@ -1,4 +1,4 @@
-﻿asgiref==3.8.1
+asgiref==3.8.1
 certifi==2024.8.30
 charset-normalizer==3.4.0
 cloudinary==1.41.0
@@ -30,3 +30,5 @@ sqlparse==0.5.2
 typing_extensions==4.12.2
 tzdata==2024.2
 urllib3==2.2.3
+whitenoise==6.8.2
+python-dotenv==1.0.1

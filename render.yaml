@@ -30,7 +30,7 @@ services:
         fromService:
           name: hotel-management-backend
           type: web
-          property: host
+          property: hostWithScheme
 
 databases:
   - name: hotel-db

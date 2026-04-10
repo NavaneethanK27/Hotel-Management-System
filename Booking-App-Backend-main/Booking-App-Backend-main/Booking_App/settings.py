@@ -30,7 +30,7 @@ SECRET_KEY = 'django-insecure-fca+(383w*r4(u+nb$=uclv&cbmp6jdu%=dubygp@84tk-!=rf
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+
 
 
 # Application definition
@@ -157,6 +157,10 @@ CSRF_TRUSTED_ORIGINS = [
     'https://booking-app-backend-gqr0.onrender.com',
     'https://booking-app-nine-ruby.vercel.app',
 ]
+# Add any RENDER_EXTERNAL_URL automatically
+_render_hostname = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if _render_hostname:
+    CSRF_TRUSTED_ORIGINS.append(f'https://{_render_hostname}')
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 # CORS_ALLOWED_ORIGINS = [
@@ -184,6 +188,6 @@ DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
 # DATABASES['default'] = dj_database_url.parse(database_url)
 
 
-DEBUG = os.environ.get("DEBUG","True").lower() == "true"
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
+DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "*").split(",")
 SECRET_KEY = os.environ.get("SECRET_KEY", 'django-insecure-fca+(383w*r4(u+nb$=uclv&cbmp6jdu%=dubygp@84tk-!=rf')
