@@ -1,0 +1,39 @@
+services:
+  # Backend Django Service
+  - type: web
+    name: hotel-management-backend
+    runtime: python
+    rootDir: Booking-App-Backend-main/Booking-App-Backend-main
+    buildCommand: ./build.sh
+    startCommand: gunicorn Booking_App.wsgi
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: hotel-db
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"
+      - key: ALLOWED_HOSTS
+        value: "*"
+
+  # Frontend React Service (Static Site)
+  - type: web
+    name: hotel-management-frontend
+    runtime: static
+    rootDir: Booking-App-main (1)/Booking-App-main
+    buildCommand: npm install; npm run build
+    staticPublishPath: dist
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          name: hotel-management-backend
+          type: web
+          property: host
+
+databases:
+  - name: hotel-db
+    databaseName: hotel_db
+    user: postgres
+    plan: free
