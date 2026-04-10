@@ -4,7 +4,7 @@ services:
     name: hotel-management-backend
     runtime: python
     rootDir: Booking-App-Backend-main/Booking-App-Backend-main
-    buildCommand: ./build.sh
+    buildCommand: bash ./build.sh
     startCommand: gunicorn Booking_App.wsgi
     envVars:
       - key: DATABASE_URL
