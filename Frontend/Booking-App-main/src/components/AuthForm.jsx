@@ -11,6 +11,7 @@ const AuthForm = () => {
     name: "",
   });
   const [isLogin, setIsLogin] = useState(true);
+  const [errorMsg, setErrorMsg] = useState("");
 
   useEffect(() => {
     if (user) {
@@ -20,6 +21,7 @@ const AuthForm = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    setErrorMsg(""); // Clear error on typing
   };
   async function handleLogin() {
     console.log("Logging In", formData);
@@ -42,6 +44,9 @@ const AuthForm = () => {
       );
 
       if (!response.ok) {
+        if (response.status === 401) {
+          throw new Error("Invalid email or password");
+        }
         throw new Error("Login failed");
       }
 
@@ -53,6 +58,7 @@ const AuthForm = () => {
       navigate("/");
     } catch (error) {
       console.error("Error during login:", error);
+      setErrorMsg(error.message);
     }
   }
   async function handleRegister() {
@@ -77,7 +83,7 @@ const AuthForm = () => {
       );
 
       if (!response.ok) {
-        throw new Error("Register failed");
+        throw new Error("Registration failed. Email might already be in use.");
       }
 
       const data = await response.json(); // Parse the JSON response
@@ -87,11 +93,13 @@ const AuthForm = () => {
       navigate("/");
     } catch (error) {
       console.error("Error during register:", error);
+      setErrorMsg(error.message);
     }
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setErrorMsg("");
     if (isLogin) {
       await handleLogin();
     } else {
@@ -101,11 +109,13 @@ const AuthForm = () => {
   const toggleAuthMode = () => {
     setIsLogin((prev) => !prev);
     setFormData({ email: "", password: "", name: "" }); // Clear form data when switching
+    setErrorMsg("");
   };
   return (
     <div className="auth-form-container">
       <form className="auth-form" onSubmit={handleSubmit}>
         <h2>{isLogin ? "Login to Your Account" : "Create an Account"}</h2>
+        {errorMsg && <div className="error-message" style={{color: 'red', marginBottom: '10px'}}>{errorMsg}</div>}
         {!isLogin && (
           <input
             type="text"
