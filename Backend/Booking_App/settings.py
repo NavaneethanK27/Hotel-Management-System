@@ -25,12 +25,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-fca+(383w*r4(u+nb$=uclv&cbmp6jdu%=dubygp@84tk-!=rf'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-fca+(383w*r4(u+nb$=uclv&cbmp6jdu%=dubygp@84tk-!=rf')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
+DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
 
-
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
 
 
 # Application definition
@@ -157,37 +157,21 @@ CSRF_TRUSTED_ORIGINS = [
     'https://booking-app-backend-gqr0.onrender.com',
     'https://booking-app-nine-ruby.vercel.app',
 ]
-# Add any RENDER_EXTERNAL_URL automatically
+# Automatically trust any Render-deployed hostname
 _render_hostname = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 if _render_hostname:
     CSRF_TRUSTED_ORIGINS.append(f'https://{_render_hostname}')
+
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
-# CORS_ALLOWED_ORIGINS = [
-#     "http://localhost:5173",       # Vite dev server
-#     "http://localhost:3000",       # in case you use this too
-# ]
 CORS_EXPOSE_HEADERS = [
-    "Content-Type",
-    "Authorization",
+    'Content-Type',
+    'Authorization',
 ]
+
 ROOT_URLCONF = 'Booking_App.urls'
-import os
 
-# For offline serving:
-MEDIA_URL = '/media/'  # URL path for media files
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Directory to store media files
-
-# DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+# Media files
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
-
-
-
-# import dj_database_url
-# database_url = os.environ.get("DATABASE_URL")
-# DATABASES['default'] = dj_database_url.parse(database_url)
-
-
-DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "*").split(",")
-SECRET_KEY = os.environ.get("SECRET_KEY", 'django-insecure-fca+(383w*r4(u+nb$=uclv&cbmp6jdu%=dubygp@84tk-!=rf')
