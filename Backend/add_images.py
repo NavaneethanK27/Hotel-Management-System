@@ -40,17 +40,13 @@ rooms_data = [
     }
 ]
 
-# Note: I need to copy the images from the brain directory to the workspace first
-# Or just use the brain paths if the script can access them.
-# The previous paths were:
-# C:\Users\naveen\.gemini\antigravity\brain\c803d555-ea3f-4db3-a445-dc6b02ea8a06\luxury_hotel_room_1_1775824964882.png
 
 def add_rooms_and_images():
-    # Update paths to actual current paths (will be fixed in the next step)
+   
     actual_paths = [
-        r"C:\Users\naveen\.gemini\antigravity\brain\c803d555-ea3f-4db3-a445-dc6b02ea8a06\luxury_hotel_room_1_1775824964882.png",
-        r"C:\Users\naveen\.gemini\antigravity\brain\c803d555-ea3f-4db3-a445-dc6b02ea8a06\deluxe_hotel_room_2_1775825164478.png",
-        r"C:\Users\naveen\.gemini\antigravity\brain\c803d555-ea3f-4db3-a445-dc6b02ea8a06\standard_hotel_room_3_1775825182371.png"
+        r"C:\Users\naveen\OneDrive\Desktop\Hotel Booking System\luxury_hotel_room_1.png",
+        r"C:\Users\naveen\OneDrive\Desktop\Hotel Booking System\deluxe_hotel_room_2.png",
+        r"C:\Users\naveen\OneDrive\Desktop\Hotel Booking System\standard_hotel_room_3.png"
     ]
     
     for i, data in enumerate(rooms_data):
