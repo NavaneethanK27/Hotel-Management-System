@@ -17,7 +17,7 @@ A full-stack Hotel Booking and Management System built with a React frontend and
 - **React 18** (Vite)
 - **React Router** (Navigation)
 - **Context API** (State Management)
-- **Vanilla CSS** (Custom Styling)
+- **CSS** (Custom Styling)
 
 ### Backend
 - **Django 5.1** & **Django REST Framework**
