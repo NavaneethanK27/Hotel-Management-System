@@ -71,5 +71,4 @@ The application will be available at `http://localhost:5173/`.
 ## 📸 Database Management
 You can manage the system via the Django Admin at `http://127.0.0.1:8000/admin/` or via **pgAdmin** on port 5433.
 
-## 📄 License
 This project is for educational purposes.
